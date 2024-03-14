@@ -9,15 +9,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   lastName: string;
 
-  @IsNotEmpty()
-  screenName: string;
-
-  @IsNotEmpty()
-  imageUrl: string;
-
   @IsEmail()
   email: string;
-
-  @IsNotEmpty()
-  password: string;
 }
