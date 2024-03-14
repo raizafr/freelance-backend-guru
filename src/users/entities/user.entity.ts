@@ -1,4 +1,13 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { PersonalProfile } from 'src/personal-profile/entities/personal-profile.entity';
+import { PublicProfile } from 'src/public-profile/entities/public-profile.entity';
+import { UserService } from 'src/user-service/entities/user-service.entity';
 
 @Table
 export class User extends Model {
@@ -39,4 +48,13 @@ export class User extends Model {
     type: DataType.STRING,
   })
   password: string;
+
+  @BelongsToMany(() => User, () => PublicProfile, 'userId')
+  publicProfile: User[];
+
+  @BelongsToMany(() => User, () => PersonalProfile, 'userId')
+  personalProfile: User[];
+
+  @BelongsToMany(() => User, () => UserService, 'userId')
+  userService: User[];
 }
