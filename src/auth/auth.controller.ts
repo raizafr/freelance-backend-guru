@@ -4,12 +4,15 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
 import { AddPasswordDto } from './dto/add-password.dto';
+import { CreatePublicProfileDto } from 'src/public-profile/dto/create-public-profile.dto';
+import { PublicProfileService } from 'src/public-profile/public-profile.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
+    private readonly publicProfileService: PublicProfileService,
   ) {}
 
   @Post('register')
@@ -20,5 +23,16 @@ export class AuthController {
   @Post('add-password')
   addPassword(@Body() addPassowrdDto: AddPasswordDto, @Res() res: Response) {
     return this.authService.addPassword(addPassowrdDto, res);
+  }
+
+  @Post('add-public-identity')
+  addPublicIdentity(
+    @Body() createPublicProfileDto: CreatePublicProfileDto,
+    @Res() res: Response,
+  ) {
+    return this.publicProfileService.addPublicIdentity(
+      createPublicProfileDto,
+      res,
+    );
   }
 }

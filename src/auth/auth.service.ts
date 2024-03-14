@@ -22,7 +22,7 @@ export class AuthService {
       }
       const saltOrRounds = 10;
       const hash = await bcrypt.hash(password, saltOrRounds);
-      findEmail.update({ password: hash });
+      await findEmail.update({ password: hash });
       res.status(201).json({ message: 'created password' });
     } catch (err) {
       res.status(400).json({ message: err.message });
