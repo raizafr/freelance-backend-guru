@@ -7,9 +7,18 @@ import { DatabaseModule } from './database/database.module';
 import { PublicProfileModule } from './public-profile/public-profile.module';
 import { PersonalProfileModule } from './personal-profile/personal-profile.module';
 import { UserServiceModule } from './user-service/user-service.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, AuthModule, DatabaseModule, PublicProfileModule, PersonalProfileModule, UserServiceModule],
+  imports: [
+    ConfigModule.forRoot(),
+    UsersModule,
+    AuthModule,
+    DatabaseModule,
+    PublicProfileModule,
+    PersonalProfileModule,
+    UserServiceModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
