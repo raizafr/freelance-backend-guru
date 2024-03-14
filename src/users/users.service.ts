@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { Response } from 'express';
 
 @Injectable()
 export class UsersService {
@@ -10,7 +10,17 @@ export class UsersService {
     private usersRepository: typeof User,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto, res: Response) {
+    const { firstName, lastName, email } = createUserDto;
+    try {
+      const store = await this.usersRepository.create({
+        firstName,
+        lastName,
+        email,
+      });
+      res.status(201).json({ message: 'user created', data: store });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
   }
 }

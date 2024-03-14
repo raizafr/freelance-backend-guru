@@ -26,6 +26,17 @@ export class User extends Model {
 
   @Column({
     type: DataType.STRING,
+    unique: { name: 'User_email_key', msg: 'Email already exists' },
+  })
+  email: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  profilePictureUrl: string;
+
+  @Column({
+    type: DataType.STRING,
   })
   password: string;
 }
