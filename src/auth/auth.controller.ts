@@ -10,6 +10,8 @@ import { CreatePersonalProfileDto } from 'src/personal-profile/dto/create-person
 import { PersonalProfileService } from 'src/personal-profile/personal-profile.service';
 import { CreateUserServiceDto } from 'src/user-service/dto/create-user-service.dto';
 import { UserServiceService } from 'src/user-service/user-service.service';
+import { CreatePaymentDto } from 'src/payment/dto/create-payment.dto';
+import { PaymentService } from 'src/payment/payment.service';
 
 @Controller('auth')
 export class AuthController {
@@ -19,6 +21,7 @@ export class AuthController {
     private readonly publicProfileService: PublicProfileService,
     private readonly personalProfileService: PersonalProfileService,
     private readonly userServiceService: UserServiceService,
+    private readonly paymentService: PaymentService,
   ) {}
 
   @Post('register')
@@ -59,5 +62,10 @@ export class AuthController {
     @Res() res: Response,
   ) {
     return this.userServiceService.addUserService(createUserServiceDto, res);
+  }
+
+  @Post('add-payment')
+  addPayment(@Body() createPaymentDto: CreatePaymentDto, @Res() res: Response) {
+    return this.paymentService.addPayment(createPaymentDto, res);
   }
 }

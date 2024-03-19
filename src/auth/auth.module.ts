@@ -9,6 +9,8 @@ import { PersonalProfileService } from 'src/personal-profile/personal-profile.se
 import { personalProfileProviders } from 'src/personal-profile/personal-profile.providers';
 import { UserServiceService } from 'src/user-service/user-service.service';
 import { userServiceProviders } from 'src/user-service/user-service.providers';
+import { PaymentService } from 'src/payment/payment.service';
+import { paymentProviders } from 'src/payment/payment.providers';
 
 @Module({
   controllers: [AuthController],
@@ -18,10 +20,12 @@ import { userServiceProviders } from 'src/user-service/user-service.providers';
     PublicProfileService,
     PersonalProfileService,
     UserServiceService,
+    PaymentService,
     ...usersProviders,
     ...publicProfileProviders,
     ...personalProfileProviders,
     ...userServiceProviders,
+    ...paymentProviders,
   ],
 })
 export class AuthModule {}

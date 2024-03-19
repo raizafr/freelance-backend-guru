@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Payment } from 'src/payment/entities/payment.entity';
 import { PersonalProfile } from 'src/personal-profile/entities/personal-profile.entity';
 import { PublicProfile } from 'src/public-profile/entities/public-profile.entity';
 import { UserService } from 'src/user-service/entities/user-service.entity';
@@ -16,7 +17,13 @@ export const databaseProviders = [
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
       });
-      sequelize.addModels([User, PublicProfile, PersonalProfile, UserService]);
+      sequelize.addModels([
+        User,
+        PublicProfile,
+        PersonalProfile,
+        UserService,
+        Payment,
+      ]);
       await sequelize.sync();
       return sequelize;
     },

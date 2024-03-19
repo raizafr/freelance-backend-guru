@@ -8,6 +8,8 @@ import { PublicProfileModule } from './public-profile/public-profile.module';
 import { PersonalProfileModule } from './personal-profile/personal-profile.module';
 import { UserServiceModule } from './user-service/user-service.module';
 import { ConfigModule } from '@nestjs/config';
+import { UploadModule } from './upload/upload.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ConfigModule } from '@nestjs/config';
     PublicProfileModule,
     PersonalProfileModule,
     UserServiceModule,
+    UploadModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
