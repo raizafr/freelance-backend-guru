@@ -34,6 +34,7 @@ export class PersonalProfileService {
       }
       await findUser.update({ screenName, profilePictureUrl });
       await this.publicProfileRepository.create({
+        userId: findUser.id,
         type,
         tagline,
         bio,

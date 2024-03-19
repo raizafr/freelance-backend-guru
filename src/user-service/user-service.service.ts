@@ -31,6 +31,7 @@ export class UserServiceService {
       }
 
       await this.usersServiceRepository.create({
+        userId: findUser.id,
         serviceTitle,
         serviceDescription,
         rateHour: serviceCostperHour,
