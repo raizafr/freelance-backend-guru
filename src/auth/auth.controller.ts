@@ -6,6 +6,10 @@ import { Response } from 'express';
 import { AddPasswordDto } from './dto/add-password.dto';
 import { CreatePublicProfileDto } from 'src/public-profile/dto/create-public-profile.dto';
 import { PublicProfileService } from 'src/public-profile/public-profile.service';
+import { CreatePersonalProfileDto } from 'src/personal-profile/dto/create-personal-profile.dto';
+import { PersonalProfileService } from 'src/personal-profile/personal-profile.service';
+import { CreateUserServiceDto } from 'src/user-service/dto/create-user-service.dto';
+import { UserServiceService } from 'src/user-service/user-service.service';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +17,8 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
     private readonly publicProfileService: PublicProfileService,
+    private readonly personalProfileService: PersonalProfileService,
+    private readonly userServiceService: UserServiceService,
   ) {}
 
   @Post('register')
@@ -34,5 +40,24 @@ export class AuthController {
       createPublicProfileDto,
       res,
     );
+  }
+
+  @Post('add-personal-profile')
+  addPersonalProfile(
+    @Body() createPersonalProfileDto: CreatePersonalProfileDto,
+    @Res() res: Response,
+  ) {
+    return this.personalProfileService.addPersonalProfile(
+      createPersonalProfileDto,
+      res,
+    );
+  }
+
+  @Post('add-user-service')
+  addUserService(
+    @Body() createUserServiceDto: CreateUserServiceDto,
+    @Res() res: Response,
+  ) {
+    return this.userServiceService.addUserService(createUserServiceDto, res);
   }
 }
